@@ -1,11 +1,11 @@
 package com.tde.apiVallartaRecargas.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "TblRecarga")
+@Table(name = "tblrecarga")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,33 +23,31 @@ public class Recarga {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "Id")
+        @Column(name = "id")
         private Long id;
 
-        @Column(name = "StrProgramador", nullable = false, length = 32)
+        @Column(name = "strprogramador", nullable = false, length = 32)
         private String strProgramador;
 
-        @Column(name = "IntTipoTarjeta")
+        @Column(name = "inttipotarjeta")
         private Short intTipoTarjeta;
 
-        @Column(name = "StrCredencial", nullable = false, length = 100)
+        @Column(name = "strcredencial", nullable = false, length = 100)
         private String strCredencial;
 
-        @Column(name = "IntSaldoInicial", nullable = false)
+        @Column(name = "intsaldoinicial", nullable = false)
         private Integer intSaldoInicial;
 
-        @Column(name = "IntSaldoFinal", nullable = false)
+        @Column(name = "intsaldofinal", nullable = false)
         private Integer intSaldoFinal;
 
-        @Column(name = "IntRecarga", nullable = false)
+        @Column(name = "intrecarga", nullable = false)
         private Integer intRecarga;
 
-        @Column(name = "FechaRecarga", nullable = false)
+        @Column(name = "fecharecarga", nullable = false)
         private LocalDateTime fechaRecarga;
 
-        @Column(name = "FechaExpiracion", nullable = false)
+        @Column(name = "fechaexpiracion", nullable = false)
         private LocalDateTime fechaExpiracion;
 
-        @Column(name = "BErrorRecarga", nullable = false)
-        private boolean bErrorRecarga;
 }

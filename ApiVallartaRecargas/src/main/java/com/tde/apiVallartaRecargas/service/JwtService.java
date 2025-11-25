@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -30,12 +31,15 @@ public class JwtService {
                 Instant now = Instant.now();
                 Instant expiration = now.plusSeconds(expirationMinutes * 60);
 
+                Map<String, Object> claims = new HashMap<>();
+                claims.put("username", username);
+
                 return Jwts.builder()
-                                .setClaims(Map.of("username", username))
-                                .setIssuedAt(Date.from(now))
-                                .setExpiration(Date.from(expiration))
-                                .signWith(signingKey, SignatureAlgorithm.HS256)
-                                .compact();
+                        .setClaims(claims)
+                        .setIssuedAt(Date.from(now))
+                        .setExpiration(Date.from(expiration))
+                        .signWith(SignatureAlgorithm.HS256, signingKey)
+                        .compact();
         }
 
         public boolean validateToken(String token) {

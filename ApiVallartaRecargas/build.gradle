@@ -1,16 +1,17 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.5.8'
+	id 'org.springframework.boot' version '2.7.18'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.tde.apiVallartaRecargas'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.4-SNAPSHOT'
 description = 'Proyecto para insertar informacion en puestos de recargas '
-
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(8)
 	}
 }
 

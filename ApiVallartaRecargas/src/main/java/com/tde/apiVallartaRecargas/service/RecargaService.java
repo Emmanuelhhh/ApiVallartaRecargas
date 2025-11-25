@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecargaService {
@@ -30,21 +31,23 @@ public class RecargaService {
                 if (CollectionUtils.isEmpty(requests)) {
                         throw new IllegalArgumentException("La lista de recargas está vacía");
                 }
-                List<Recarga> recargas = requests.stream().map(this::mapToEntity).toList();
+                List<Recarga> recargas = requests.stream()
+                        .map(this::mapToEntity)
+                        .collect(Collectors.toList());
+
                 return recargaRepository.saveAll(recargas);
         }
 
         private Recarga mapToEntity(RecargaRequest request) {
                 Recarga recarga = new Recarga();
-                recarga.setStrProgramador(request.strProgramador());
-                recarga.setIntTipoTarjeta(request.intTipoTarjeta());
-                recarga.setStrCredencial(request.strCredencial());
-                recarga.setIntSaldoInicial(request.intSaldoInicial());
-                recarga.setIntSaldoFinal(request.intSaldoFinal());
-                recarga.setIntRecarga(request.intRecarga());
+                recarga.setStrProgramador(request.getStrProgramador());
+                recarga.setIntTipoTarjeta(request.getIntTipoTarjeta());
+                recarga.setStrCredencial(request.getStrCredencial());
+                recarga.setIntSaldoInicial(request.getIntSaldoInicial());
+                recarga.setIntSaldoFinal(request.getIntSaldoFinal());
+                recarga.setIntRecarga(request.getIntRecarga());
                 recarga.setFechaRecarga(defaultDate(request.fechaRecargaAsDate()));
                 recarga.setFechaExpiracion(defaultDate(request.fechaExpiracionAsDate()));
-                recarga.setBErrorRecarga(false);
                 return recarga;
         }
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,10 @@ public class ApiController {
 
         @ExceptionHandler(IllegalArgumentException.class)
         public ResponseEntity<Map<String, String>> handleBadRequest(IllegalArgumentException ex) {
-                return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+            Map<String, String> response = new HashMap<>();
+            response.put("error", ex.getMessage());
+
+            return ResponseEntity.badRequest().body(response);
         }
+
 }
