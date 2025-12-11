@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,12 +14,15 @@ import java.time.format.DateTimeParseException;
 @AllArgsConstructor
 public class RecargaRequest {
 
-    private String strProgramador;
+  //  private String strProgramador;
+	private String strUIDsamActiva;
+	private String strUIDsamRecarga;
     private Short intTipoTarjeta;
+    private Short intSubTipoTarjeta;
     private String strCredencial;
-    private Integer intSaldoInicial;
-    private Integer intSaldoFinal;
-    private Integer intRecarga;
+    private BigDecimal decSaldoInicial;
+    private BigDecimal decSaldoFinal;
+    private BigDecimal decRecarga;
     private String fechaRecarga;
     private String fechaExpiracion;
 

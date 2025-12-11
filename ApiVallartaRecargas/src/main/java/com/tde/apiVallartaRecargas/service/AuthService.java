@@ -28,7 +28,7 @@ public class AuthService {
         }
 
         // Consulta a BD: usuario + contraseña desencriptada en el query nativo
-        Optional<User> userOpt = opeUserRepository.login(
+        Optional<User> userOpt = opeUserRepository.loginConPermiso(
                 request.getUsername(),
                 request.getPassword()
         );
@@ -36,9 +36,10 @@ public class AuthService {
         if (!userOpt.isPresent()) {
             throw new IllegalArgumentException("Credenciales inválidas");
         }
-
-        String token = jwtService.generateToken(request.getUsername());
-        return new TokenResponse(token);
+        User user = userOpt.get();
+        
+        String token = jwtService.generateToken(user);
+        return new TokenResponse(token, user.getId(), user.getUser());
     }
 
     public boolean isTokenValid(String token) {

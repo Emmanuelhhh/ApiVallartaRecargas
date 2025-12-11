@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -26,28 +27,38 @@ public class Recarga {
         @Column(name = "id")
         private Long id;
 
-        @Column(name = "strprogramador", nullable = false, length = 32)
-        private String strProgramador;
-
-        @Column(name = "inttipotarjeta")
+        @Column(name = "struidsamactiva", nullable = false, length = 100)
+        private String strUIDsamActiva;
+        
+        @Column(name = "struidsamrecarga",  nullable = false, length = 100)
+        private String strUIDsamRecarga;
+        
+        @Column(name = "intsubtipotarjeta", nullable = false )
+        private Short intSubTipoTarjeta;
+        
+        @Column(name = "inttipotarjeta", nullable = false)
         private Short intTipoTarjeta;
 
         @Column(name = "strcredencial", nullable = false, length = 100)
         private String strCredencial;
 
-        @Column(name = "intsaldoinicial", nullable = false)
-        private Integer intSaldoInicial;
+        @Column(name = "decsaldoinicial", nullable = false)
+        private BigDecimal intSaldoInicial;
 
-        @Column(name = "intsaldofinal", nullable = false)
-        private Integer intSaldoFinal;
+        @Column(name = "decsaldofinal", nullable = false)
+        private BigDecimal intSaldoFinal;
 
-        @Column(name = "intrecarga", nullable = false)
-        private Integer intRecarga;
+        @Column(name = "decrecarga", nullable = false)
+        private BigDecimal intRecarga;
 
         @Column(name = "fecharecarga", nullable = false)
         private LocalDateTime fechaRecarga;
 
         @Column(name = "fechaexpiracion", nullable = false)
         private LocalDateTime fechaExpiracion;
+        
+        @Column(name = "id_user", nullable = false)
+        private Long idUsuario;
+        
 
 }

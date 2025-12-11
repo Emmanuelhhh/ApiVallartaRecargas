@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.tde.apiVallartaRecargas'
-version = '0.0.4-SNAPSHOT'
+version = '0.0.8-SNAPSHOT'
 description = 'Proyecto para insertar informacion en puestos de recargas '
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -29,6 +29,7 @@ dependencies {
 	    implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
         compileOnly 'org.projectlombok:lombok'
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
         runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'

@@ -3,6 +3,8 @@ package com.tde.apiVallartaRecargas.service;
 import com.tde.apiVallartaRecargas.dto.RecargaRequest;
 import com.tde.apiVallartaRecargas.entity.Recarga;
 import com.tde.apiVallartaRecargas.repository.RecargaRepository;
+import com.tde.apiVallartaRecargas.util.SecurityUtils;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -22,6 +24,8 @@ public class RecargaService {
 
         @Transactional
         public Recarga crearRecarga(RecargaRequest request) {
+
+        	
                 Recarga recarga = mapToEntity(request);
                 return recargaRepository.save(recarga);
         }
@@ -39,15 +43,24 @@ public class RecargaService {
         }
 
         private Recarga mapToEntity(RecargaRequest request) {
+        	Long idUsuario = SecurityUtils.getCurrentUserId();
+            if (idUsuario == null) {
+                throw new IllegalStateException("No se pudo obtener el usuario autenticado.");
+            }
                 Recarga recarga = new Recarga();
-                recarga.setStrProgramador(request.getStrProgramador());
+               // recarga.setStrProgramador(request.getStrProgramador());
+                
+                recarga.setStrUIDsamRecarga(request.getStrUIDsamRecarga());
+                recarga.setStrUIDsamActiva(request.getStrUIDsamActiva());
                 recarga.setIntTipoTarjeta(request.getIntTipoTarjeta());
+                recarga.setIntSubTipoTarjeta(request.getIntSubTipoTarjeta());
                 recarga.setStrCredencial(request.getStrCredencial());
-                recarga.setIntSaldoInicial(request.getIntSaldoInicial());
-                recarga.setIntSaldoFinal(request.getIntSaldoFinal());
-                recarga.setIntRecarga(request.getIntRecarga());
+                recarga.setIntSaldoInicial(request.getDecSaldoInicial());
+                recarga.setIntSaldoFinal(request.getDecSaldoFinal());
+                recarga.setIntRecarga(request.getDecRecarga());
                 recarga.setFechaRecarga(defaultDate(request.fechaRecargaAsDate()));
                 recarga.setFechaExpiracion(defaultDate(request.fechaExpiracionAsDate()));
+                recarga.setIdUsuario(idUsuario);
                 return recarga;
         }
 
