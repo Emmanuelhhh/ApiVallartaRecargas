@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.tde.apiVallartaRecargas.entity.CustomUserDetails;
+import com.tde.apiVallartaRecargas.security.JwtUserPrincipal;
 
 public final class SecurityUtils {
 
@@ -21,6 +22,9 @@ public final class SecurityUtils {
 
         if (principal instanceof CustomUserDetails) {
             return ((CustomUserDetails) principal).getId();
+        }
+        if (principal instanceof JwtUserPrincipal) {
+            return ((JwtUserPrincipal) principal).getUserId();
         }
 
         // Si usas otro tipo de principal, puedes manejarlo aquí.
