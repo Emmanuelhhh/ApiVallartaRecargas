@@ -1,4 +1,4 @@
-package com.tde.apiVallartaRecargas.entity;
+package com.tde.apiVallartaRecargas.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

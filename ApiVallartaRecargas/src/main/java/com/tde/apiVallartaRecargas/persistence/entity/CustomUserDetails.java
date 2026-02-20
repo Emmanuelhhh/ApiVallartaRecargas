@@ -1,4 +1,4 @@
-package com.tde.apiVallartaRecargas.entity;
+package com.tde.apiVallartaRecargas.persistence.entity;
 
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;

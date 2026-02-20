@@ -1,4 +1,4 @@
-package com.tde.apiVallartaRecargas.entity;
+package com.tde.apiVallartaRecargas.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -22,6 +22,9 @@ public class User {
 	
 	@Column(name= "password", nullable = false)
 	private byte[] password;
+	
+	@Column(name="id_hotel")
+	private Long idHotel;
 	
 	
 }

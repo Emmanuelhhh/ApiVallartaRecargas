@@ -1,12 +1,13 @@
 package com.tde.apiVallartaRecargas.service;
 
-import com.tde.apiVallartaRecargas.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.tde.apiVallartaRecargas.persistence.entity.User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -42,6 +43,10 @@ public class JwtService {
         claims.put("userId", user.getId());
         claims.put("username", user.getUser()); // asumiendo que getUser() es el username
 
+        if (user.getIdHotel() != null) {
+            claims.put("hotelId", user.getIdHotel());
+        }
+        
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getUser()) // también dejamos el username como subject
@@ -89,6 +94,8 @@ public class JwtService {
         return extractClaim(token, claims -> claims.get("username", String.class));
         // Alternativa: extractClaim(token, Claims::getSubject);
     }
+    
+    
 
     /**
      * NUEVO: extraer userId desde el token.
@@ -111,6 +118,21 @@ public class JwtService {
         });
     }
 
+    public Long extractHotelId(String token) {
+        return extractClaim(token, claims -> {
+            Object value = claims.get("hotelId");
+            if (value == null) {
+                return null;
+            }
+            if (value instanceof Integer) {
+                return ((Integer) value).longValue();
+            }
+            if (value instanceof Long) {
+                return (Long) value;
+            }
+            return Long.valueOf(value.toString());
+        });
+    }
     // ================== Helpers internos ==================
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

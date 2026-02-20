@@ -1,8 +1,8 @@
 package com.tde.apiVallartaRecargas.service;
 
 import com.tde.apiVallartaRecargas.dto.RecargaRequest;
-import com.tde.apiVallartaRecargas.entity.Recarga;
-import com.tde.apiVallartaRecargas.repository.RecargaRepository;
+import com.tde.apiVallartaRecargas.persistence.entity.Recarga;
+import com.tde.apiVallartaRecargas.persistence.repository.RecargaRepository;
 import com.tde.apiVallartaRecargas.util.SecurityUtils;
 
 import org.springframework.stereotype.Service;

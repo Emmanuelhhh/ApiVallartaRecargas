@@ -3,7 +3,7 @@ package com.tde.apiVallartaRecargas.controller;
 import com.tde.apiVallartaRecargas.dto.LoginRequest;
 import com.tde.apiVallartaRecargas.dto.RecargaRequest;
 import com.tde.apiVallartaRecargas.dto.TokenResponse;
-import com.tde.apiVallartaRecargas.entity.Recarga;
+import com.tde.apiVallartaRecargas.persistence.entity.Recarga;
 import com.tde.apiVallartaRecargas.service.AuthService;
 import com.tde.apiVallartaRecargas.service.RecargaService;
 import org.springframework.http.HttpHeaders;

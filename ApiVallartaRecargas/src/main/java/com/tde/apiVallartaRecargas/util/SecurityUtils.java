@@ -3,7 +3,7 @@ package com.tde.apiVallartaRecargas.util;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.tde.apiVallartaRecargas.entity.CustomUserDetails;
+import com.tde.apiVallartaRecargas.persistence.entity.CustomUserDetails;
 import com.tde.apiVallartaRecargas.security.JwtUserPrincipal;
 
 public final class SecurityUtils {

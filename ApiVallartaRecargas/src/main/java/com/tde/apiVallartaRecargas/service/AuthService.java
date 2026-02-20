@@ -2,8 +2,9 @@ package com.tde.apiVallartaRecargas.service;
 
 import com.tde.apiVallartaRecargas.dto.LoginRequest;
 import com.tde.apiVallartaRecargas.dto.TokenResponse;
-import com.tde.apiVallartaRecargas.entity.User;
-import com.tde.apiVallartaRecargas.repository.OpeUserRepository;
+import com.tde.apiVallartaRecargas.persistence.entity.User;
+import com.tde.apiVallartaRecargas.persistence.repository.OpeUserRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -39,10 +40,21 @@ public class AuthService {
         User user = userOpt.get();
         
         String token = jwtService.generateToken(user);
-        return new TokenResponse(token, user.getId(), user.getUser());
+        return new TokenResponse(token, user.getId(), user.getUser(), user.getIdHotel());
     }
 
     public boolean isTokenValid(String token) {
         return jwtService.validateToken(token);
     }
+    
+    
+    //Nueva implementación
+    public Long getUserIdFromToken(String token) {
+        return jwtService.extractUserId(token);
+    }
+
+    public Long getHotelIdFromToken(String token) {
+        return jwtService.extractHotelId(token);
+    }
+
 }

@@ -1,10 +1,10 @@
-package com.tde.apiVallartaRecargas.repository;
+package com.tde.apiVallartaRecargas.persistence.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.tde.apiVallartaRecargas.entity.User;
+import com.tde.apiVallartaRecargas.persistence.entity.User;
 
 import java.util.Optional;
 
