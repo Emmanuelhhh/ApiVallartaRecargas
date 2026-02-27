@@ -13,7 +13,7 @@ import java.util.Date;
                 @UniqueConstraint(name = "UX_wallet_codigo", columnNames = {"codigo"})
         },
         indexes = {
-                @Index(name = "IX_wallet_hotel_estatus_vigencia", columnList = "id_hotel, estatus, vigencia_inicio, vigencia_fin")
+                @Index(name = "IX_wallet_hotel_estatus_vigencia", columnList = "id_hotel, status, vigencia_inicio, vigencia_fin")
         }
 )
 @Getter
@@ -50,7 +50,7 @@ public class Wallet {
      * (Luego lo convertimos a Enum si lo decides)
      */
     @Column(name = "status", length = 20, nullable = false)
-    private Integer estatus;
+    private Integer status;
 
     /**
      * Saldo vigente. Recomendación: actualizarlo siempre en la misma transacción

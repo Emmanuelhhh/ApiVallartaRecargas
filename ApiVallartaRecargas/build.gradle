@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.tde.apiVallartaRecargas'
-version = '0.0.8-SNAPSHOT'
+version = '0.0.9_hotel'
 description = 'Proyecto para insertar informacion en puestos de recargas '
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'

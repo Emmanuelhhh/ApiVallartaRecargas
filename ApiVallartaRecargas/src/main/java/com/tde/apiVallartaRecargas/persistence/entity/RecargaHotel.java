@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(
-        name = "recarga_hotel",
+        name = "ope_recarga_hotel",
         uniqueConstraints = {
                 @UniqueConstraint(name = "UX_recarga_hotel_folio", columnNames = {"folio"})
         },

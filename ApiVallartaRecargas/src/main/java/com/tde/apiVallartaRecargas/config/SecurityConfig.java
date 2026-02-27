@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
                 // IMPORTANTE: permitir el login sin autenticación
-                .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v2/login").permitAll()
                 // si quieres permitir swagger u otros:
                 // .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated(); // el resto requiere JWT

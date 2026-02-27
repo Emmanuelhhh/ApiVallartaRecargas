@@ -58,14 +58,12 @@ public class ApiControllerV2 {
 
         // Necesitas poder obtener estos valores del JWT (claims) o de tu sesión/token store:
         Long idUser = authService.getUserIdFromToken(token);
-        Long idHotel = authService.getHotelIdFromToken(token);
 
         String ipOrigen = obtenerIp(httpRequest);
 
         RecargaResponseDTO response = recargaService.realizarRecarga(
                 requestBody,
                 idUser,
-                idHotel,
                 ipOrigen
         );
 

@@ -59,4 +59,6 @@ public class RecargaRequestHotelDTO {
      * La app cliente la envía o el backend la calcula (según tu lógica).
      */
     private String fechaExpiracion;
+    
+    private Long idHotel;
 }

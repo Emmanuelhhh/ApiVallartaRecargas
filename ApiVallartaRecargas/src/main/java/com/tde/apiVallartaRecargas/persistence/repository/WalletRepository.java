@@ -18,7 +18,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
      * Obtiene el wallet ACTIVO de un hotel (sin bloqueo).
      * Útil para consultas de lectura (mostrar saldo, vigencia, etc.).
      */
-    Optional<Wallet> findFirstByHotel_IdAndEstatus(Long idHotel, String estatus);
+    Optional<Wallet> findFirstByHotel_IdAndStatus(Long idHotel, String status);
 
     /**
      * Obtiene el wallet ACTIVO y vigente por hotel (sin bloqueo).
@@ -27,10 +27,10 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
     @Query("SELECT w " +
            "FROM Wallet w " +
            "WHERE w.hotel.id = :idHotel " +
-           "  AND w.estatus = :estatus " +
+           "  AND w.status = :status " +
            "  AND :fechaActual BETWEEN w.vigenciaInicio AND w.vigenciaFin")
     Optional<Wallet> findActivoVigenteByHotel(@Param("idHotel") Long idHotel,
-                                              @Param("estatus") String estatus,
+                                              @Param("status") String status,
                                               @Param("fechaActual") Date fechaActual);
 
     /**
@@ -43,9 +43,9 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
     @Query("SELECT w " +
            "FROM Wallet w " +
            "WHERE w.hotel.id = :idHotel " +
-           "  AND w.estatus = :estatus")
+           "  AND w.status = :status")
     Optional<Wallet> findActivoByHotelForUpdate(@Param("idHotel") Long idHotel,
-                                                @Param("estatus") String estatus);
+                                                @Param("status") Integer status);
 
     /**
      * Variante con bloqueo + vigencia.
@@ -54,9 +54,9 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
     @Query("SELECT w " +
            "FROM Wallet w " +
            "WHERE w.hotel.id = :idHotel " +
-           "  AND w.estatus = :estatus " +
+           "  AND w.status = :status " +
            "  AND :fechaActual BETWEEN w.vigenciaInicio AND w.vigenciaFin")
     Optional<Wallet> findActivoVigenteByHotelForUpdate(@Param("idHotel") Long idHotel,
-                                                       @Param("estatus") Integer estatus,
+                                                       @Param("status") Integer status,
                                                        @Param("fechaActual") Date fechaActual);
 }

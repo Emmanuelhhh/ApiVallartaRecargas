@@ -23,17 +23,21 @@ public class RecargaHotelService {
     private final RecargaHotelRepository recargaHotelRepository;
     private final WalletMovementRepository walletMovementRepository;
     private final HotelFolioTicketSeqRepository hotelFolioTicketSeqRepository;
+    private final CardAssignmentRepository cardAssignmentRepository;
 
     public RecargaHotelService(WalletRepository walletRepository,
                           SamRepository samRepository,
                           RecargaHotelRepository recargaHotelRepository,
                           WalletMovementRepository walletMovementRepository,
-                          HotelFolioTicketSeqRepository hotelFolioTicketSeqRepository) {
+                          HotelFolioTicketSeqRepository hotelFolioTicketSeqRepository,
+                          CardAssignmentRepository cardAssignmentRepository) {
+                          
         this.walletRepository = walletRepository;
         this.samRepository = samRepository;
         this.recargaHotelRepository = recargaHotelRepository;
         this.walletMovementRepository = walletMovementRepository;
         this.hotelFolioTicketSeqRepository = hotelFolioTicketSeqRepository;
+        this.cardAssignmentRepository = cardAssignmentRepository;
     }
 
     /**
@@ -43,13 +47,25 @@ public class RecargaHotelService {
     @Transactional
     public RecargaResponseDTO realizarRecarga(RecargaRequestHotelDTO request,
                                               Long idUser,
-                                              Long idHotel,
+                                              //Long idHotel,
                                               String ipOrigen) {
 
         // ======================================================
         // 1. Validaciones básicas de entrada
         // ======================================================
-
+    	//obtenemos el id del reques
+    	//para validar si este hotel y la tarjeta estan asignadas a dicho hotel sino 
+    	//se sale del fljo y se crea la respuesta de con el mensaje.
+    	Long idHotel= request.getIdHotel();
+    	
+        long tarjetaAsignada = cardAssignmentRepository.countTarjetaAsignadaHotel(
+                request.getStrCredencial().trim(),
+                request.getIdHotel()
+        );
+        if (tarjetaAsignada <= 0) {
+            return rechazo("La tarjeta no pertenece al hotel indicado");
+        }
+    	
         if (request.getDecRecarga() == null ||
             request.getDecRecarga().compareTo(BigDecimal.ZERO) <= 0) {
 
@@ -68,7 +84,7 @@ public class RecargaHotelService {
                 .findActivaByUidAndHotel(
                         request.getStrUIDsamRecarga(),
                         idHotel,
-                        "ACTIVA"
+                        1
                 )
                 .orElse(null);
 
@@ -172,7 +188,7 @@ public class RecargaHotelService {
         // ======================================================
 
         return RecargaResponseDTO.builder()
-                .folio(folio)
+                .folio(folioTicket)
                 .estatus("APLICADA")
                 .mensaje("Recarga aplicada correctamente")
                 .montoRecarga(request.getDecRecarga())

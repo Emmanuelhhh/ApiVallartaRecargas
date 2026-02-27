@@ -7,12 +7,12 @@ import java.util.Date;
 
 @Entity
 @Table(
-        name = "sam",
+        name = "cat_sam",
         uniqueConstraints = {
                 @UniqueConstraint(name = "UX_sam_uid", columnNames = {"uid"})
         },
         indexes = {
-                @Index(name = "IX_sam_hotel_estatus", columnList = "id_hotel, estatus")
+                @Index(name = "IX_sam_hotel_status", columnList = "id_hotel, status")
         }
 )
 @Getter
@@ -54,7 +54,7 @@ public class Sam {
     private Hotel hotel;
 
     @Column(name = "status", nullable = false)
-    private Integer estatus;
+    private Integer status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_alta", nullable = false, updatable = false)

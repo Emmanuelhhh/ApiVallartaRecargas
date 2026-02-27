@@ -35,8 +35,8 @@ public interface SamRepository extends JpaRepository<Sam, Long> {
            "FROM Sam s " +
            "WHERE s.uid = :uid " +
            "  AND s.hotel.id = :idHotel " +
-           "  AND s.estatus = :estatus")
+           "  AND s.status = :status")
     Optional<Sam> findActivaByUidAndHotel(@Param("uid") String uid,
                                           @Param("idHotel") Long idHotel,
-                                          @Param("estatus") String estatus);
+                                          @Param("status") Integer status);
 }
