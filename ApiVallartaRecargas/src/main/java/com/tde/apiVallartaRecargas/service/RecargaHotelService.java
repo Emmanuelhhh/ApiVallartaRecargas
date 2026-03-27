@@ -179,7 +179,7 @@ public class RecargaHotelService {
         // 8. Finalizar recarga
         // ======================================================
 
-        recarga.setSaldoFinal(request.getDecSaldoInicial()); // saldo de tarjeta si aplica
+        //recarga.setSaldoFinal(request.getDecSaldoInicial()); // saldo de tarjeta si aplica
         recarga.setEstatus("APLICADA");
         recargaHotelRepository.save(recarga);
 
